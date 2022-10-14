@@ -9,11 +9,6 @@ const Login = () => {
     try {
       axios.post('https://profitmodel-server.herokuapp.com/auth/login',
         {
-          headers: {
-            "access-control-allow-origin": "*",
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json"
-          },
           data: {
             phone: phone,
             password: password
