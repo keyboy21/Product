@@ -4,24 +4,16 @@ import axios from 'axios';
 
 const Login = () => {
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     const { phone, password } = values;
-    try {
-      axios.post('https://profitmodel-server.herokuapp.com/auth/login',
-        {
-          data: {
-            phone: phone,
-            password: password
-          }
-        })
-        .then((res) => res.data)
-        .then((data) => {
-          console.log('asd', data)
-        })
-    }
-    catch (error) {
-      console.log('Error', error)
-    }
+    axios.post('https://profitmodel-server.herokuapp.com/auth/login', { phone: phone, password: password })
+      .then((res) => res.data)
+      .then((data) => {
+        console.log('asd', data)
+      })
+      .catch(error => {
+        console.log('Error', error);
+      })
   };
 
   const onFinishFailed = (errorInfo) => {
