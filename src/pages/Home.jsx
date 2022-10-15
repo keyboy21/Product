@@ -21,9 +21,8 @@ const Home = () => {
     setIsModalOpen(true);
     setproduct({ name, id })
   };
-
   const DeleteP = async () => {
-    await axios.delete(`https://profitmodel-server.herokuapp.com/api/product/${product.id}`, {
+    await axios.delete(`${import.meta.env.VITE_BASE_URL}/product/${product.id}`, {
       headers: { Authorization: "Bearer " + token }
     }).then((res) => res.data)
     setIsModalOpen(false);
@@ -33,7 +32,7 @@ const Home = () => {
     setIsModalOpen(false);
   };
 
-  const { data, error } = useSWR(['https://profitmodel-server.herokuapp.com/api/product', token], productFetcher)
+  const { data, error } = useSWR([`${import.meta.env.VITE_BASE_URL}/product`, token], productFetcher)
   console.log('Data', data);
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>

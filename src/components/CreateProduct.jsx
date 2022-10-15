@@ -30,7 +30,7 @@ const CreateProduct = ({ token }) => {
     }
     console.log(DateList)
     console.log('Imagename', images);
-    await axios.post(`https://profitmodel-server.herokuapp.com/api/product/`, {
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/product/`, {
       headers: { Authorization: "Bearer " + token },
       data: DateList
     }).then((res) => res.data)
@@ -179,13 +179,13 @@ const CreateProduct = ({ token }) => {
           <InputNumber inputMode='numeric' />
         </Form.Item>
 
-        {/* <Form.Item label="Images" valuePropName="fileList"> */}
+        <Form.Item label="Images" valuePropName="fileList">
         <Upload listType="picture-card" onChange={(props) => { ImageSort(props) }}>
           <div>
             <div style={{ marginTop: 8 }}>Upload</div>
           </div>
         </Upload>
-        {/* </Form.Item> */}
+        </Form.Item>
 
         <Form.Item
           wrapperCol={{

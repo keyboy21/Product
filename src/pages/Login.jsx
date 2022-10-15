@@ -3,16 +3,14 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const navigate = useNavigate();
-
+  
   const onFinish = async (values) => {
     const { phone, password } = values;
-    const res = await axios.post('https://profitmodel-server.herokuapp.com/api/auth/login', {
+    const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, {
       phone: phone,
       password: password
     }).then((res) => res.data)
-    console.log(res)
     if (res.success) {
       navigate('/')
       localStorage.setItem('token', res.data)
