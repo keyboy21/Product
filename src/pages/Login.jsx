@@ -1,19 +1,22 @@
 import { Button, Form, Input, Layout, Row, Col } from 'antd';
-import React, { useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
+  const navigate = useNavigate();
+
   const onFinish = async (values) => {
     const { phone, password } = values;
-    axios.post('https://profitmodel-server.herokuapp.com/auth/login', { phone: phone, password: password })
-      .then((res) => res.data)
-      .then((data) => {
-        console.log('asd', data)
-      })
-      .catch(error => {
-        console.log('Error', error);
-      })
+    const res = await axios.post('https://profitmodel-server.herokuapp.com/api/auth/login', {
+      phone: phone,
+      password: password
+    }).then((res) => res.data)
+    console.log(res)
+    if (res.success) {
+      navigate('/')
+      localStorage.setItem('token', res.data)
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -36,7 +39,6 @@ const Login = () => {
               }}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
-              autoComplete="on"
             >
               <Form.Item
                 label="phone"

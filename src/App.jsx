@@ -2,7 +2,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { Layout } from 'antd';
 const { Content } = Layout;
 
@@ -12,26 +11,17 @@ import Login from './pages/Login'
 import CreateProduct from "./components/CreateProduct";
 
 function App() {
-  const [login, setLogin] = useState(false)
-
-  useEffect(() => {
-    const checkToken = localStorage.getItem('token')
-    if (checkToken) setLogin(true)
-  }, [])
+  const token = localStorage.getItem('token')
 
   return (
     <Layout>
-      <Navbar login={login} />
-      <Content>
+      <Navbar token={token} />
+      <Content style={{ height: "100vh" }}>
         <Routes>
-          {login ?
-            <>
-              <Route path="/" index element={<Home />} />
-              <Route path="/create" index element={<CreateProduct />} />
-            </>
-            :
-            <Route path="*" element={<Login />} />
-          }
+          <Route path="/" index element={<Home />} />
+          <Route path="/*" index element={<Home />} />
+          <Route path="/create" index element={<CreateProduct token={token} />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Content>
     </Layout>
