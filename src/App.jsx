@@ -18,10 +18,9 @@ function App() {
       <Navbar token={token} />
       <Content style={{ height: "100vh" }}>
         <Routes>
-          <Route path="/" index element={<Home />} />
+          <Route path="/*" index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create" index element={<CreateProduct token={token} />} />
-          <Route path="*" index element={<Home />} />
         </Routes>
       </Content>
     </Layout>
