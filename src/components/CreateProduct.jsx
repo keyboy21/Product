@@ -1,17 +1,19 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { Button, Checkbox, Form, Input, Upload, InputNumber } from 'antd';
+import { Button, Form, Input, Upload, InputNumber } from 'antd';
 
 const CreateProduct = ({ token }) => {
   const [images, setIamges] = useState()
 
   const ImageSort = (props) => {
+    console.log(props);
     let files = []
     props.fileList.forEach((item) => {
-      files.push({ name: item.name })
+      files.push(item.originFileObj)
     });
     setIamges(files)
   }
+  
   const onFinish = async (values) => {
     const { Name, Description, SALE, WHOLESALE, BANK, categoryId, brandId, measurementId, discount } = values;
     const DateList = {
@@ -180,11 +182,11 @@ const CreateProduct = ({ token }) => {
         </Form.Item>
 
         <Form.Item label="Images" valuePropName="fileList">
-        <Upload listType="picture-card" onChange={(props) => { ImageSort(props) }}>
-          <div>
-            <div style={{ marginTop: 8 }}>Upload</div>
-          </div>
-        </Upload>
+          <Upload listType="picture-card" onChange={(props) => { ImageSort(props) }}>
+            <div>
+              <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+          </Upload>
         </Form.Item>
 
         <Form.Item

@@ -2,11 +2,7 @@ import { useEffect } from 'react'
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const token = localStorage.getItem('token')
-
-  useEffect(() => {
-  }, [token]);
+const Navbar = ({ token }) => {
 
   return (
     <nav className="navbar">
